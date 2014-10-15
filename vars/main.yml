@@ -1,0 +1,6 @@
+---
+s3_mysql_backup_mysql_root_password:
+s3_mysql_backup_bucket_name:
+s3_mysql_backup_additional_cron_cmd:
+s3_mysql_backup_s3_access_key:
+s3_mysql_backup_s3_access_token:

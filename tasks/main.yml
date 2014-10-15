@@ -1,0 +1,23 @@
+---
+
+- name: Install s3cmd
+  yum: pkg=s3cmd state=installed
+  when: ansible_os_family == "Debian"
+
+- name: Setup s3cmd configuration
+  template:
+    src: s3cfg
+    dest: ~/.s3cfg
+
+- name: Add s3mysqlbackup.sh script
+  template:
+    src: s3mysqlbackup.sh.j2
+    dest: ~/s3mysqlbackup.sh
+    mode: 0700
+
+- name: add cron to run s3 backup script
+  cron:
+    name: "backup mysql dbs to s3" 
+    job: "/root/s3mysqlbackup.sh{{ s3_mysql_backup_additional_cron_cmd }}"
+    hour: "0"
+    minute: "0"

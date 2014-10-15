@@ -1,7 +1,11 @@
 ---
 
-- name: Install s3cmd
+- name: Install s3cmd with yum
   yum: pkg=s3cmd state=installed
+  when: ansible_os_family == "RedHat"
+
+- name: Install s3cmd with apt
+  apt: name=s3cmd state=present
   when: ansible_os_family == "Debian"
 
 - name: Setup s3cmd configuration
